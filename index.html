@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Biblioteca</title>
+
+    <!--
+        AlaSQL é uma biblioteca JavaScript que permite
+        executar comandos SQL diretamente no navegador.
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/alasql@4.6.6/dist/alasql.min.js"></script>
+
+    <!-- Arquivo de estilos do sistema -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho do sistema -->
+    <header class="header">
+        <div class="container">
+            <h1>📚 Biblioteca</h1>
+            <p>Sistema para cadastro de livros, leitores e empréstimos</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Cards com resumo dos dados cadastrados -->
+        <section class="resumo">
+            <div class="card">
+                <span>📚</span>
+                <strong id="totalLivros">0</strong>
+                <small>Livros</small>
+            </div>
+
+            <div class="card">
+                <span>👤</span>
+                <strong id="totalLeitores">0</strong>
+                <small>Leitores</small>
+            </div>
+
+            <div class="card">
+                <span>🔄</span>
+                <strong id="totalEmprestimos">0</strong>
+                <small>Empréstimos</small>
+            </div>
+
+            <div class="card">
+                <span>📌</span>
+                <strong id="totalAtivos">0</strong>
+                <small>Empréstimos ativos</small>
+            </div>
+        </section>
+
+        <!-- Menu principal -->
+        <nav class="menu">
+            <button class="menu-btn active" data-tela="livros">Livros</button>
+            <button class="menu-btn" data-tela="leitores">Leitores</button>
+            <button class="menu-btn" data-tela="emprestimos">Empréstimos</button>
+        </nav>
+
+        <!-- =====================================================
+             TELA DE LIVROS
+             ===================================================== -->
+        <section id="livros" class="tela active">
+
+            <div class="titulo-secao">
+                <div>
+                    <h2>Cadastro de Livros</h2>
+                    <p>Cadastre e gerencie os livros da biblioteca.</p>
+                </div>
+
+                <button id="btnExemplos" class="btn secundario">
+                    Inserir exemplos
+                </button>
+            </div>
+
+            <!-- Formulário de livros -->
+            <form id="formLivro" class="formulario">
+
+                <!--
+                    Campo oculto utilizado durante a edição.
+                    Quando estiver vazio, o sistema fará INSERT.
+                    Quando tiver um ID, o sistema fará UPDATE.
+                -->
+                <input type="hidden" id="livroId">
+
+                <div class="campo">
+                    <label for="titulo">Título *</label>
+                    <input
+                        type="text"
+                        id="titulo"
+                        placeholder="Digite o título"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="autor">Autor *</label>
+                    <input
+                        type="text"
+                        id="autor"
+                        placeholder="Digite o autor"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="ano">Ano</label>
+                    <input
+                        type="number"
+                        id="ano"
+                        placeholder="Ex.: 2024"
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="categoria">Categoria</label>
+                    <input
+                        type="text"
+                        id="categoria"
+                        placeholder="Ex.: Romance"
+                    >
+                </div>
+
+                <div class="acoes-formulario">
+                    <button type="submit" class="btn primario">
+                        Salvar livro
+                    </button>
+
+                    <button type="button" id="btnLimparLivro" class="btn secundario">
+                        Limpar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabela que receberá os livros através de SELECT -->
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Ano</th>
+                            <th>Categoria</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabelaLivros"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             TELA DE LEITORES
+             ===================================================== -->
+        <section id="leitores" class="tela">
+
+            <div class="titulo-secao">
+                <div>
+                    <h2>Cadastro de Leitores</h2>
+                    <p>Cadastre as pessoas que podem realizar empréstimos.</p>
+                </div>
+            </div>
+
+            <!-- Formulário de leitores -->
+            <form id="formLeitor" class="formulario">
+
+                <!-- ID usado durante a edição -->
+                <input type="hidden" id="leitorId">
+
+                <div class="campo">
+                    <label for="nomeLeitor">Nome *</label>
+                    <input
+                        type="text"
+                        id="nomeLeitor"
+                        placeholder="Nome completo"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="emailLeitor">E-mail</label>
+                    <input
+                        type="email"
+                        id="emailLeitor"
+                        placeholder="email@exemplo.com"
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="cursoLeitor">Curso</label>
+                    <input
+                        type="text"
+                        id="cursoLeitor"
+                        placeholder="Curso"
+                    >
+                </div>
+
+                <div class="acoes-formulario">
+                    <button type="submit" class="btn primario">
+                        Salvar leitor
+                    </button>
+
+                    <button type="button" id="btnLimparLeitor" class="btn secundario">
+                        Limpar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabela de leitores -->
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Curso</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabelaLeitores"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             TELA DE EMPRÉSTIMOS
+             ===================================================== -->
+        <section id="emprestimos" class="tela">
+
+            <div class="titulo-secao">
+                <div>
+                    <h2>Empréstimos</h2>
+                    <p>Registre e controle os empréstimos dos livros.</p>
+                </div>
+            </div>
+
+            <!-- Formulário de empréstimo -->
+            <form id="formEmprestimo" class="formulario">
+
+                <div class="campo">
+                    <label for="livroEmprestimo">Livro *</label>
+                    <select id="livroEmprestimo" required></select>
+                </div>
+
+                <div class="campo">
+                    <label for="leitorEmprestimo">Leitor *</label>
+                    <select id="leitorEmprestimo" required></select>
+                </div>
+
+                <div class="campo">
+                    <label for="dataEmprestimo">Data *</label>
+                    <input
+                        type="date"
+                        id="dataEmprestimo"
+                        required
+                    >
+                </div>
+
+                <div class="acoes-formulario">
+                    <button type="submit" class="btn primario">
+                        Registrar empréstimo
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabela de empréstimos -->
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Livro</th>
+                            <th>Leitor</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabelaEmprestimos"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mensagem rápida para o usuário -->
+    <div id="mensagem" class="mensagem"></div>
+
+    <footer>
+        <p>Biblioteca • HTML + CSS + JavaScript + AlaSQL</p>
+    </footer>
+
+    <!-- Arquivo JavaScript principal -->
+    <script src="js/app.js"></script>
+
+</body>
+</html>

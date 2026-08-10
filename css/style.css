@@ -1,0 +1,339 @@
+/* ============================================================
+   ESTILO DO SISTEMA DE BIBLIOTECA
+   ============================================================ */
+
+/* Cores utilizadas no sistema */
+:root {
+    --azul: #2563eb;
+    --azul-escuro: #1d4ed8;
+    --fundo: #f4f7fb;
+    --branco: #ffffff;
+    --texto: #172033;
+    --cinza: #64748b;
+    --borda: #dbe3ef;
+    --verde: #15803d;
+    --vermelho: #dc2626;
+}
+
+/* Configuração geral */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Área que limita a largura do conteúdo */
+.container {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+}
+
+/* ============================================================
+   CABEÇALHO
+   ============================================================ */
+
+.header {
+    background: linear-gradient(135deg, var(--azul-escuro), var(--azul));
+    color: white;
+    padding: 35px 0;
+}
+
+.header h1 {
+    margin: 0 0 8px;
+    font-size: 2.3rem;
+}
+
+.header p {
+    margin: 0;
+    opacity: .9;
+}
+
+/* ============================================================
+   CARDS DO RESUMO
+   ============================================================ */
+
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 22px 0;
+}
+
+.card {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 18px;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    box-shadow: 0 5px 15px rgba(15, 23, 42, .05);
+}
+
+.card span {
+    grid-row: span 2;
+    font-size: 1.7rem;
+}
+
+.card strong {
+    font-size: 1.5rem;
+}
+
+.card small {
+    color: var(--cinza);
+}
+
+/* ============================================================
+   MENU
+   ============================================================ */
+
+.menu {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.menu-btn {
+    border: 1px solid var(--borda);
+    background: white;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.menu-btn.active,
+.menu-btn:hover {
+    background: var(--azul);
+    color: white;
+    border-color: var(--azul);
+}
+
+/* ============================================================
+   TELAS
+   ============================================================ */
+
+/* Todas as telas começam escondidas */
+.tela {
+    display: none;
+}
+
+/* Apenas a tela ativa é exibida */
+.tela.active {
+    display: block;
+}
+
+/* Título de cada seção */
+.titulo-secao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.titulo-secao h2 {
+    margin: 0 0 5px;
+}
+
+.titulo-secao p {
+    margin: 0;
+    color: var(--cinza);
+}
+
+/* ============================================================
+   FORMULÁRIOS
+   ============================================================ */
+
+.formulario {
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.campo label {
+    font-weight: bold;
+    font-size: .9rem;
+}
+
+.campo input,
+.campo select {
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font: inherit;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: 2px solid #bfdbfe;
+    border-color: var(--azul);
+}
+
+.acoes-formulario {
+    display: flex;
+    align-items: end;
+    gap: 8px;
+}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+
+.btn {
+    border: 0;
+    border-radius: 7px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn.primario {
+    background: var(--azul);
+    color: white;
+}
+
+.btn.primario:hover {
+    background: var(--azul-escuro);
+}
+
+.btn.secundario {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.btn.excluir {
+    background: #fee2e2;
+    color: var(--vermelho);
+}
+
+.btn.pequeno {
+    padding: 7px 9px;
+    font-size: .8rem;
+}
+
+/* ============================================================
+   TABELAS
+   ============================================================ */
+
+.tabela-container {
+    overflow-x: auto;
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    margin-bottom: 35px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+
+th,
+td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--borda);
+    text-align: left;
+}
+
+th {
+    background: #f8fafc;
+}
+
+tr:last-child td {
+    border-bottom: 0;
+}
+
+.vazio {
+    text-align: center;
+    color: var(--cinza);
+    padding: 25px;
+}
+
+/* ============================================================
+   MENSAGEM
+   ============================================================ */
+
+.mensagem {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #0f172a;
+    color: white;
+    padding: 13px 17px;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: .25s;
+}
+
+.mensagem.exibir {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mensagem.erro {
+    background: #991b1b;
+}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+
+footer {
+    text-align: center;
+    color: var(--cinza);
+    padding: 30px 0;
+}
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+
+@media (max-width: 800px) {
+
+    .resumo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .formulario {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-secao {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .menu {
+        flex-direction: column;
+    }
+
+    .menu-btn {
+        width: 100%;
+    }
+}
